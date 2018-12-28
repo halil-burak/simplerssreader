@@ -16,8 +16,8 @@ import com.rometools.rome.io.XmlReader;
 public class MyRssReader {
 
 	public String consume() throws IllegalArgumentException, FeedException, MalformedURLException, IOException {
-		String url = "https://catalog.api.gamedistribution.com/api/v1.0/rss/All/?collection=all&categories=All&type=all&amount=10&page=1&format=xml";
-		//String url = "http://rss.cnn.com/rss/cnn_latest.rss";
+		//String url = "https://catalog.api.gamedistribution.com/api/v1.0/rss/All/?collection=all&categories=All&type=all&amount=10&page=1&format=xml";
+		String url = "http://rss.cnn.com/rss/cnn_latest.rss";
 		StringBuilder sb = new StringBuilder();
 		XmlReader reader = new XmlReader(new URL(url));
 		SyndFeed feed = new SyndFeedInput().build(reader);
