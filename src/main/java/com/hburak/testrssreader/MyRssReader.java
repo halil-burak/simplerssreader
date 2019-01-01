@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.Map;
+import java.util.Properties;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
@@ -62,7 +63,8 @@ public class MyRssReader {
 	}
 
 	public String consumeJson4() {
-		String link = "http://localhost:9045/test3"; //just a string
+		String link = "https://catalog.api.gamedistribution.com/api/v1.0/rss/All/?collection=all&categories=All&type=all&amount=10&page=1&format=json"; //just a string
+		// https://catalog.api.gamedistribution.com/api/v1.0/rss/All/?collection=all&categories=All&type=all&amount=10&page=1&format=json
 		StringBuilder sb = new StringBuilder();
 		URLConnection urlconn = null;
 		InputStreamReader in = null;
@@ -70,6 +72,8 @@ public class MyRssReader {
 		try {
 			URL url = new URL(link);
 			urlconn = url.openConnection();
+			System.setProperty("http.agent", "");
+			urlconn.addRequestProperty("user-agent", System.getProperty("http.agent"));
 			if(urlconn != null) {
 				urlconn.setReadTimeout(60*100);
 			}
@@ -89,5 +93,10 @@ public class MyRssReader {
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+
+	private void viewSysProps() {
+		Properties props = System.getProperties();
+		props.forEach((k, v) -> System.out.println(k + ":" + v));
 	}
 }
